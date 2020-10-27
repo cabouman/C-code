@@ -1,34 +1,20 @@
 #include "get_btilde.h"
 
-double get_btilde(
-    double delta,   /* difference between pixel x_s and its neighbor x_r */
-    double b,       /* neighborhood relationship coefficient. */
-    double sigma_x, /* scale parameter. Increasing sigma_x reduces regularization. */
-    double p,       /* 1st shape parameter of qggmrf. Typically, p=1.2, and it is best to choose 1.0<p<=2.0 */
-    double q,       /* 2ed shape parameter of qggmrf. It is best to choose q=2.0 */
-    double T        /* threshold parameter of qggmrf. Typically, T=1.0 */
-    ) 
-/* Computes the b_tilde parameter used for surrogate function minimize.*/
-/* The value of b_tilde is computed for the qGGMRF potential function.*/
+double get_btilde( double delta, double b, double sigma_x, double p, double q, double T ) 
+/* Computes the b_tilde parameter used for surrogate function minimization for the qGGMRF prior. */
 {
-    double b_tilde, a, b, c;
-    int sgn = 1;
+    double b_tilde;
+    double tmpa, tmpb, tmpc; /* temporary constants used in calculation */
     
-    delta = fabs(delta);
+    delta = fabs(delta); /* + sigma_x*DBL_EPSILON; */
 
-    if ( delta==0 ) {
-        b_tilde = b/(p*pow(sigma_x,p));
-    } else {
-        /* compute first two terms in expression */
-        consta = b*pow(delta,p-2)/(2*pow(sigma_x,p));
+    /* tmpa is the product of the first three terms reorganized for numberical stability when q=0. */ 
+    tmpa = b*pow(delta,q-2.0)/(2.0*pow(sigma_x,p)*pow(T*sigma_x,q-p));
 
-        /* compute third term in expression */
-        constb = pow(delta/(T*sigma_x),q-p);
-        constc = constb*((q/p)+constb)/pow(1+constb,2.0);
+    /* tmpc is the third term in formula. */ 
+    tmpb = pow(delta/(T*sigma_x),q-p);
+    tmpc = ((q/p)+tmpb)/pow(1+tmpb,2.0);
 
-        b_tilde = consta*constb;
-    }
-    
+    b_tilde = tmpa*tmpb;    
     return b_tilde;
-    
 }

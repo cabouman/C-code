@@ -1,29 +1,27 @@
-//
-//  get_btilde.c
-//  
-//
-//  Created by Benjamin Foster on 10/20/15.
-//
-//
-
 #include "get_btilde.h"
 
-double get_btilde( double delta, double b, double sigma_x, double p, double q, double T) {
+double get_btilde(
+    double delta,   /* difference between pixel x_s and its neighbor x_r */
+    double b,       /* neighborhood relationship coefficient. */
+    double sigma_x, /* scale parameter. Increasing sigma_x reduces regularization. */
+    double p,       /* 1st shape parameter of qggmrf. Typically, p=1.2, and it is best to choose 1.0<p<=2.0 */
+    double q,       /* 2nd shape parameter of qggmrf. It is best to choose q=2.0 */
+    double T        /* threshold parameter of qggmrf. Typically, T=1.0 */
+    ) 
+/* Computes the b_tilde parameter used for surrogate function minimization for the qGGMRF prior. */
+{
+    double b_tilde;
+    double tmpa, tmpb, tmpc; /* temporary constants used in calculation */
     
-    double b_tilde, leading_const=0;
-    int sgn = 1;
-    
-    if (delta < 0) {
-        sgn = -1;
-    }
-    
-    if ( delta==0 ) {
-        b_tilde = b/(p*pow(sigma_x,p));
-    } else {
-        leading_const = b*pow(fabs(delta),(p-1))/(pow(sigma_x,p))*sgn*pow(fabs(delta)/(T*sigma_x),(q-p))*(q/p + pow(fabs(delta)/(T*sigma_x),q-p))/pow((1+pow(fabs(delta)/(T*sigma_x),q-p)),2);
-        b_tilde = leading_const/(2*delta);
-    }
-    
+    delta = fabs(delta); /* + sigma_x*DBL_EPSILON; */
+
+    /* tmpa is the product of the first three terms reorganized for numberical stability when q=0. */ 
+    tmpa = b*pow(delta,q-2.0)/(2.0*pow(sigma_x,p)*pow(T*sigma_x,q-p));
+
+    /* tmpc is the third term in formula. */ 
+    tmpb = pow(delta/(T*sigma_x),q-p);
+    tmpc = ((q/p)+tmpb)/pow(1+tmpb,2.0);
+
+    b_tilde = tmpa*tmpb;    
     return b_tilde;
-    
 }

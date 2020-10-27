@@ -22,7 +22,7 @@ double solve(/* pointer to function to be solved */
 /* Returns code=-2 if a NAN or infinity creeps into computation         */
 {
     int     signa, signb, signc;
-    double  fa, fb, fc, c;//, signaling_nan();
+    double  fa, fb, fc, c;
     double  dist;
 
     fa = f(a, pblock);  signa = fa>0;

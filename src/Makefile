@@ -3,13 +3,17 @@ CC = gcc
 CFLAGS = -ansi -Wall -pedantic
 BIN = ../bin
 
-all: Example
+all: RWExample BtildeExample
 
 clean:
-	/bin/rm *.o $(BIN)/Example
+	/bin/rm *.o $(BIN)/*
 
-OBJ = tiff.o allocate.o randlib.o
+OBJ = tiff.o allocate.o randlib.o get_btilde.o solve.o
 
-Example: Example.o $(OBJ) 
-	$(CC) $(CFLAGS) -o Example Example.o $(OBJ) -lm
-	mv Example $(BIN)
+RWExample: RWExample.o $(OBJ) 
+	$(CC) $(CFLAGS) -o RWExample RWExample.o $(OBJ) -lm
+	mv RWExample $(BIN)
+
+BtildeExample: BtildeExample.o $(OBJ) 
+	$(CC) $(CFLAGS) -o BtildeExample BtildeExample.o $(OBJ) -lm
+	mv BtildeExample $(BIN)
