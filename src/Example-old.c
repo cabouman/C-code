@@ -10,7 +10,7 @@ void error(char *name);
 int main (int argc, char **argv) 
 {
   FILE *fp;
-  struct TIFF_img input_img, green_img, color_img;
+  struct TIFF_img input_img, green_img;
   double **img1,**img2;
   int32_t i,j,pixel;
 
@@ -68,13 +68,9 @@ int main (int argc, char **argv)
     img2[i][j] += 32*normal();
   }
 
-  /* set up structure for output achromatic image */
+  /* set up structure for output image */
   /* to allocate a full color image use type 'c' */
   get_TIFF ( &green_img, input_img.height, input_img.width, 'g' );
-    
-  /* set up structure for output color image */
-  /* Note that the type is 'c' rather than 'g' */
-  get_TIFF ( &color_img, input_img.height, input_img.width, 'c' );
 
   /* copy green component to new images */
   for ( i = 0; i < input_img.height; i++ )
@@ -89,49 +85,24 @@ int main (int argc, char **argv)
     }
   }
 
-  /* Illustration: constructing a sample color image -- interchanging the red and green components from the input color image */
-  for ( i = 0; i < input_img.height; i++ )
-      for ( j = 0; j < input_img.width; j++ ) {
-          color_img.color[0][i][j] = input_img.color[1][i][j];
-          color_img.color[1][i][j] = input_img.color[0][i][j];
-          color_img.color[2][i][j] = input_img.color[2][i][j];
-      }
-
-  /* open green image file */
+  /* open image file */
   if ( ( fp = fopen ( "green.tif", "wb" ) ) == NULL ) {
     fprintf ( stderr, "cannot open file green.tif\n");
     exit ( 1 );
   }
 
-  /* write green image */
+  /* write image */
   if ( write_TIFF ( fp, &green_img ) ) {
     fprintf ( stderr, "error writing TIFF file %s\n", argv[2] );
     exit ( 1 );
   }
 
-  /* close green image file */
-  fclose ( fp );
-    
-    
-  /* open color image file */
-  if ( ( fp = fopen ( "color.tif", "wb" ) ) == NULL ) {
-      fprintf ( stderr, "cannot open file color.tif\n");
-      exit ( 1 );
-  }
-    
-  /* write color image */
-  if ( write_TIFF ( fp, &color_img ) ) {
-      fprintf ( stderr, "error writing TIFF file %s\n", argv[2] );
-      exit ( 1 );
-  }
-    
-  /* close color image file */
+  /* close image file */
   fclose ( fp );
 
   /* de-allocate space which was used for the images */
   free_TIFF ( &(input_img) );
   free_TIFF ( &(green_img) );
-  free_TIFF ( &(color_img) );
   
   free_img( (void**)img1 );
   free_img( (void**)img2 );  
@@ -146,8 +117,6 @@ void error(char *name)
     printf("It then horizontally filters the green component, adds noise,\n");
     printf("and writes out the result as an 8-bit image\n");
     printf("with the name 'green.tiff'.\n");
-    printf("It also generates an 8-bit color image,\n");
-    printf("that swaps red and green components from the input image");
     exit(1);
 }
 
