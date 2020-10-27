@@ -3,7 +3,7 @@
 #include "allocate.h"
 #include "randlib.h"
 #include "typeutil.h"
-#include "get_btilde.h"
+#include "qGGMRF.h"
 
 
 int main (int argc, char **argv) 

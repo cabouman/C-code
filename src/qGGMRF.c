@@ -1,4 +1,4 @@
-#include "get_btilde.h"
+#include "qGGMRF.h"
 
 double get_btilde(
     double delta,   /* difference between pixel x_s and its neighbor x_r */

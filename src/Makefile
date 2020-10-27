@@ -8,7 +8,7 @@ all: RWExample BtildeExample
 clean:
 	/bin/rm *.o $(BIN)/*
 
-OBJ = tiff.o allocate.o randlib.o get_btilde.o solve.o
+OBJ = tiff.o allocate.o randlib.o qGGMRF.o solve.o
 
 RWExample: RWExample.o $(OBJ) 
 	$(CC) $(CFLAGS) -o RWExample RWExample.o $(OBJ) -lm
