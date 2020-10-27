@@ -1,5 +1,5 @@
 # For Linux or any machines with gcc compiler
-CC = gcc
+CC = gcc 
 CFLAGS = -ansi -Wall -pedantic
 BIN = ../bin
 
