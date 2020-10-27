@@ -2,5 +2,7 @@
 
 BIN="../bin"
 
-$BIN/Example img03.tif
+$BIN/RWExample img03.tif
+
+$BIN/BtildeExample
 
