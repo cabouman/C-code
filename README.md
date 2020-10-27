@@ -19,3 +19,4 @@ The ``demo`` subdirectory contains a script and an image to run a very simple de
 	cd demo
 	source ./Demo.sh
 
+Then to display the plots for the qGGMRF functions, you can run the script ``PlotData.m`` in Matlab.
