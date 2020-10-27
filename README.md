@@ -17,5 +17,5 @@ This will compile the code with a gcc compiler and put the executable ``Example`
 The ``demo`` subdirectory contains a script and an image to run a very simple demo. You can run the demo with the following commands:
 
 	cd demo
-	Source ./Demo.sh
+	source ./Demo.sh
 
