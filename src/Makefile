@@ -1,6 +1,6 @@
 # For Linux or any machines with gcc compiler
 CC = gcc 
-CFLAGS = -ansi -Wall -pedantic
+CFLAGS = -std=c99 -Wall -pedantic
 BIN = ../bin
 
 all: RWExample BtildeExample
