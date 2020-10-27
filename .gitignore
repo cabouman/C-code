@@ -1,4 +1,6 @@
 *.o
 *.DS_Store
 bin/*
-demo/output/*
+demo/output/color.tif
+demo/output/green.tif
+demo/output/data.txt
