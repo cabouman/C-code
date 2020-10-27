@@ -1,7 +1,7 @@
 # For Linux or any machines with gcc compiler
 CC = gcc
 CFLAGS = -ansi -Wall -pedantic
-BIN = ../bin 
+BIN = ../bin
 
 all: Example
 
