@@ -1,5 +1,5 @@
 # C-code 
-*C-code utilities used for Prof. Bouman's ECE37 and ECE641 classes at Purdue University.*
+*C-code utilities used for Prof. Bouman's ECE637 and ECE641 classes at Purdue University.*
 
 ## System Requirements
 1. GCC compiler
