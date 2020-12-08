@@ -3,17 +3,17 @@ CC = gcc
 CFLAGS = -std=c99 -Wall -pedantic
 BIN = ../bin
 
-all: RWExample BtildeExample
+all: ImageReadWriteExample SurrogateFunctionExample 
 
 clean:
 	/bin/rm *.o $(BIN)/*
 
 OBJ = tiff.o allocate.o randlib.o qGGMRF.o solve.o
 
-RWExample: RWExample.o $(OBJ) 
-	$(CC) $(CFLAGS) -o RWExample RWExample.o $(OBJ) -lm
-	mv RWExample $(BIN)
+ImageReadWriteExample: ImageReadWriteExample.o $(OBJ) 
+	$(CC) $(CFLAGS) -o ImageReadWriteExample ImageReadWriteExample.o $(OBJ) -lm
+	mv ImageReadWriteExample $(BIN)
 
-BtildeExample: BtildeExample.o $(OBJ) 
-	$(CC) $(CFLAGS) -o BtildeExample BtildeExample.o $(OBJ) -lm
-	mv BtildeExample $(BIN)
+SurrogateFunctionExample: SurrogateFunctionExample.o $(OBJ) 
+	$(CC) $(CFLAGS) -o SurrogateFunctionExample SurrogateFunctionExample.o $(OBJ) -lm
+	mv SurrogateFunctionExample $(BIN)

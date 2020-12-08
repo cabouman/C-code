@@ -33,7 +33,7 @@ int main (int argc, char **argv)
   rho = get_spc(NN, sizeof(double));
   Q = get_spc(NN, sizeof(double));
 
-  /* Generage array of delta and rho values */
+  /* Generate array of delta and rho values */
   for ( i = 0; i < NN; ++i)
   {
     delta[i] = 4.0*(i - N)/N;
@@ -43,7 +43,7 @@ int main (int argc, char **argv)
   btilde = get_btilde(delta_prime, b, sigma_x, p, q, T);
   offset = get_rho(delta_prime, b, sigma_x, p, q, T) - btilde*pow(delta_prime,2.0);
 
-  /* Generage array of rho and Q values */
+  /* Generate array of rho and Q values */
   for ( i = 0; i < NN; ++i)
   {
     /* code */
