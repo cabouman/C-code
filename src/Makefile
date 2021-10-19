@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -std=c99 -Wall -pedantic
 BIN = ../bin
 
-all: ImageReadWriteExample SurrogateFunctionExample 
+all: ImageReadWriteExample SurrogateFunctionExample SolveExample
 
 clean:
 	/bin/rm *.o $(BIN)/*
@@ -17,3 +17,8 @@ ImageReadWriteExample: ImageReadWriteExample.o $(OBJ)
 SurrogateFunctionExample: SurrogateFunctionExample.o $(OBJ) 
 	$(CC) $(CFLAGS) -o SurrogateFunctionExample SurrogateFunctionExample.o $(OBJ) -lm
 	mv SurrogateFunctionExample $(BIN)
+
+SolveExample: SolveExample.o $(OBJ) 
+	$(CC) $(CFLAGS) -o SolveExample SolveExample.o $(OBJ) -lm
+	mv SolveExample $(BIN)
+
