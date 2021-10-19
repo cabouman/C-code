@@ -12,9 +12,9 @@
 
 double solve(/* pointer to function to be solved */
              double (*f) (double x, void * pblock), 
-             void * pblock, /* parameter passed to callback function f */
-             double a,      /* minimum value of solution */
-             double b,      /* maximum value of solution */
+             void * pblock, /* pointer to structure containing function parameters */
+             double a,      /* low bound on solution */
+             double b,      /* upper bound on solution */
              double err,    /* accuarcy of solution */
              int *code      /* error code */
              );

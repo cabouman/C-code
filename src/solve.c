@@ -8,7 +8,7 @@
 
 double solve(/* pointer to function to be solved */
              double (*f) (double x, void * pblock), 
-             void * pblock, /* pointer to structure containing parameters for the function f. */
+             void * pblock, /* pointer to structure containing function parameters */
              double a,      /* low bound on solution */
              double b,      /* upper bound on solution */
              double err,    /* desired accuarcy of solution */
